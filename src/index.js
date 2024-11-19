@@ -15,6 +15,6 @@ dotenv.config({
       });
     })
     .catch((error) => {
-      console.log("DB connectio failed !!", error);
+      console.log("DB connection failed !!", error);
     });
 })();
