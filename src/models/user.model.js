@@ -22,10 +22,12 @@ const userSchema = new Schema(
     avatar: {
       type: String,
     },
-    workspace: {
-      type: Schema.Types.ObjectId,
-      ref: "Workspace",
-    },
+    workspace: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Workspace",
+      },
+    ],
     tickets: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -55,7 +57,7 @@ userSchema.methods.isPasswordCorrect = async function (password) {
 };
 
 userSchema.methods.generateAccessToken = function () {
-  jwt.sign(
+  return jwt.sign(
     {
       _id: this._id,
       email: this.email,
@@ -68,7 +70,7 @@ userSchema.methods.generateAccessToken = function () {
   );
 };
 userSchema.methods.generateRefreshToken = function () {
-  jwt.sign(
+  return jwt.sign(
     {
       _id: this._id,
     },
